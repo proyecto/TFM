@@ -8,7 +8,7 @@ setup.template.pattern: "filebeat-*"
 setup.dashboards.enabled: true
 
 setup.kibana:
-  host: http://ai.lisuto.com:5601
+  host: ["http://localhost:5601"]
   username: elastic
   password: youpassword
 
