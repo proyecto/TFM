@@ -63,17 +63,17 @@ services:
       replicas: 1
 
 configs:
-	elastic_config:
-    	file: ./elasticsearch/config/elasticsearch.yml
-	logstash_config:
-		file: ./logstash/config/logstash.yml
-	logstash_pipeline:
-    	file: ./logstash/pipeline/logstash.conf
-	kibana_config:
-    	file: ./kibana/config/kibana.yml
-	filebeat_config:
-    	file: ./filebeat/filebeat.yml
+    elastic_config:
+        file: ./elasticsearch/config/elasticsearch.yml
+    logstash_config:
+        file: ./logstash/config/logstash.yml
+    logstash_pipeline:
+        file: ./logstash/pipeline/logstash.conf
+    kibana_config:
+        file: ./kibana/config/kibana.yml
+    filebeat_config:
+        file: ./filebeat/filebeat.yml
 
 networks:
-	elk:
-    	driver: overlay
+    elk:
+        driver: overlay
