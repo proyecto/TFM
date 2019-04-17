@@ -12,8 +12,8 @@ services:
         target: /usr/share/elasticsearch/config/elasticsearch.yml
     environment:
       - "ES_JAVA_OPTS=-Xmx256m -Xms256m"
-	  - http.cors.enabled=true
-	  - http.cors.allow-origin=*
+	  - "http.cors.enabled=true"
+	  - "http.cors.allow-origin=*"
     networks:
       - elk
     deploy:
