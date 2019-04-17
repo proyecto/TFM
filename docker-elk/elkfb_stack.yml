@@ -61,7 +61,7 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-	  
+
 configs:
 	elastic_config:
     	file: ./elasticsearch/config/elasticsearch.yml
