@@ -53,7 +53,7 @@ services:
     image: docker.elastic.co/beats/filebeat:6.6.1
     configs:
       - source: filebeat_config
-        target: /usr/share/filebeat/config/filebeat.yml
+        target: /etc/filebeat/filebeat.yml
     depends_on:
       - elasticsearch
     networks:
