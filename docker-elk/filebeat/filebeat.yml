@@ -9,6 +9,6 @@ setup.template.pattern: "filebeat-*"
 setup.dashboards.enabled: true
 
 output.logstash:
-  hosts: ["127.0.0.1:5000"]
+  hosts: ["localhost:5000"]
   tls:
 	  insecure: true

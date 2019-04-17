@@ -1,5 +1,5 @@
 cluster.name: "docker-cluster"
-network.host: 127.0.0.1
+network.host: localhost
 discovery.zen.minimum_master_nodes: 1
 discovery.type: single-node
 
