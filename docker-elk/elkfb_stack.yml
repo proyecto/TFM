@@ -56,10 +56,11 @@ services:
         target: /usr/share/filebeat/config/filebeat.yml
     depends_on:
       - elasticsearch
-    deploy:
-      replicas: 1      
     networks:
       - elk
+    deploy:
+      replicas: 1      
+    
 
 configs:
 
