@@ -1,3 +1,6 @@
+filebeat.config.modules:
+  enabled: true
+  path: ${path.config}/modules.d/*.yml
 filebeat.inputs:
 - type: docker
   containers.ids:
@@ -5,6 +8,7 @@ filebeat.inputs:
     stream: "stdout"
     ids:
       - "*"
+      enabled: true
   processors:
     - add_docker_metadata: ~
 	
