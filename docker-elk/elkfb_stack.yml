@@ -55,6 +55,8 @@ services:
     configs:
       - source: filebeat_config
         target: /usr/share/filebeat/filebeat.yml
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
     depends_on:
       - elasticsearch
     networks:
