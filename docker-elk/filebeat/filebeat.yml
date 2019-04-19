@@ -1,6 +1,9 @@
 setup.template.name: "filebeat-"
 setup.template.pattern: "filebeat-*"
 setup.dashboards.enabled: true
+setup.kibana.host: 'kibana:5601'
+setup.kibana.protocol: "http"
+setup.kibana.path: ''
 filebeat.inputs:
   - type: docker
     containers.ids: '*'
@@ -11,6 +14,4 @@ output.logstash:
     hosts: ['logstash:5000', 'logstash:5001']
     tls:
         insecure: true
-setup.kibana.host: 'kibana:5601'
-setup.kibana.protocol: "http"
-setup.kibana.path: ''
+

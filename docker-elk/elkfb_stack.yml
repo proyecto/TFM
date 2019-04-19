@@ -55,13 +55,13 @@ services:
     configs:
       - source: filebeat_config
         target: /usr/share/filebeat/filebeat.yml
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - elasticsearch
     networks:
       - elk
-    command: filebeat -e -strict.perms=false
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sudo chown $USER:docker /var/run/docker.sock;filebeat -e -strict.perms=false;
     deploy:
       mode: replicated
       replicas: 1
