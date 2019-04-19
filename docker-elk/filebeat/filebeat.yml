@@ -10,6 +10,6 @@ filebeat.inputs:
       - add_docker_metadata: ~
 
 output.logstash:
-    hosts: ['localhost:5000', 'localhost:5001']
+    hosts: ['logstash:5000', 'logstash:5001']
     tls:
         insecure: true
