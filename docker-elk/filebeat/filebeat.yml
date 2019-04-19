@@ -12,5 +12,3 @@ output.logstash:
     hosts: ['localhost:5000', 'localhost:5001']
     tls:
         insecure: true
-output.elasticsearch:
-  hosts: ["elasticsearch:9200"]
