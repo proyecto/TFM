@@ -54,7 +54,7 @@ services:
     image: docker.elastic.co/beats/filebeat:7.0.0
     configs:
       - source: filebeat_config
-        target: /etc/filebeat/filebeat.yml
+        target: /usr/share/kibana/config/kibana.yml
     depends_on:
       - elasticsearch
     networks:
