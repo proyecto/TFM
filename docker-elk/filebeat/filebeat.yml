@@ -1,6 +1,7 @@
 setup.template.name: "filebeat-"
 setup.template.pattern: "filebeat-*"
 setup.dashboards.enabled: true
+setup.kibana.host: 'http://localhost:5601'
 
 filebeat.modules:
 - module: system
