@@ -2,12 +2,6 @@ setup.template.name: "filebeat-"
 setup.template.pattern: "filebeat-*"
 setup.dashboards.enabled: true
 setup.kibana.host: 'http://kibana:5601'
-
-filebeat.modules:
-- module: system
-  syslog:
-    enabled: true
-    var.paths: ["/var/log/host/system.log*"]
 	
 filebeat.inputs:
   - type: docker
