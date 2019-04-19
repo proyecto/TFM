@@ -59,9 +59,6 @@ services:
       - elasticsearch
     networks:
       - elk
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: filebeat -e -strict.perms=false
     deploy:
       mode: replicated
       replicas: 1
