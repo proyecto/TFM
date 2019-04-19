@@ -57,6 +57,8 @@ services:
         target: /usr/share/filebeat/filebeat.yml
     depends_on:
       - elasticsearch
+      - kibana
+      - logstash
     networks:
       - elk
     deploy:
