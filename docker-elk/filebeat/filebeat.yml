@@ -11,4 +11,6 @@ output.logstash:
     hosts: ['logstash:5000', 'logstash:5001']
     tls:
         insecure: true
-setup.kibana.host: 'http://kibana:5601'
+setup.kibana.host: 'kibana:5601'
+setup.kibana.protocol: "http"
+setup.kibana.path: /kibana
