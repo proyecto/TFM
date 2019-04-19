@@ -8,6 +8,12 @@ filebeat.modules:
   syslog:
     enabled: true
     var.paths: ["/var/log/host/system.log*"]
+	
+filebeat.inputs:
+  - type: docker
+    containers.ids: '*'
+    processors:
+      - add_docker_metadata: ~
 
 output.logstash:
     hosts: ['localhost:5000', 'localhost:5001']
