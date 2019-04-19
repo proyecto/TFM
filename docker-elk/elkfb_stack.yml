@@ -61,7 +61,7 @@ services:
       - elk
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: sudo chown $USER:docker /var/run/docker.sock;filebeat -e -strict.perms=false;
+    command: filebeat -e -strict.perms=false
     deploy:
       mode: replicated
       replicas: 1
