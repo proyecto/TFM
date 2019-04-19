@@ -13,4 +13,4 @@ output.logstash:
         insecure: true
 setup.kibana.host: 'kibana:5601'
 setup.kibana.protocol: "http"
-setup.kibana.path: /
+setup.kibana.path: ''
