@@ -88,7 +88,8 @@ services:
       mode: replicated
       replicas: 1
     cap_add:
-      - ALL
+      - NET_ADMIN
+      - NET_RAW
 
 configs:
     elastic_config:
