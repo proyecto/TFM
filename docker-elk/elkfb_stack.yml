@@ -87,6 +87,8 @@ services:
     deploy:
       mode: replicated
       replicas: 1
+    cap_add:
+      - ALL
 
 configs:
     elastic_config:

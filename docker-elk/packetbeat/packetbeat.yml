@@ -1,5 +1,5 @@
-setup.template.name: "filebeat-"
-setup.template.pattern: "filebeat-*"
+setup.template.name: "packetbeat-"
+setup.template.pattern: "packetbeat-*"
 setup.dashboards.enabled: true
 setup.kibana.host: 'kibana:5601'
 setup.kibana.protocol: "http"
