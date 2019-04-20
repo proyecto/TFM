@@ -5,10 +5,10 @@ setup.kibana.host: 'kibana:5601'
 setup.kibana.protocol: "http"
 setup.kibana.path: ''
 filebeat.inputs:
-  - type: docker
-    containers.ids: '*'
-    processors:
-      - add_docker_metadata: ~
+- type: log
+  enabled: true
+  paths:
+    - /var/log/filebeat/*.log
 
 output.logstash:
   hosts: ['logstash:5000', 'logstash:5001']

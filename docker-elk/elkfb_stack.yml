@@ -52,6 +52,7 @@ services:
   
   filebeat:
     image: docker.elastic.co/beats/filebeat:7.0.0
+    user: root
     configs:
       - source: filebeat_config
         target: /usr/share/filebeat/filebeat.yml

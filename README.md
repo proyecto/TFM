@@ -23,6 +23,7 @@ Update the the repository information, install and init docker:
 `sudo apt-get install docker-compose`
 `systemctl start docker`
 `systemctl enable docker`
+`sudo usermod -a -G docker $USER`
 
 ### Initialize Swarm
 
