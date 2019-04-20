@@ -4,8 +4,8 @@ setup.dashboards.enabled: true
 setup.kibana.host: 'kibana:5601'
 setup.kibana.protocol: "http"
 setup.kibana.path: ''
-
 packetbeat.interfaces.device: any
+
 packetbeat.protocols:
 - type: dns
   ports: [53]
