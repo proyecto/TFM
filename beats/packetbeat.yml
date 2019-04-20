@@ -1,0 +1,26 @@
+version: "3.7"
+
+services:
+
+  packetbeat:
+    image: docker.elastic.co/beats/packetbeat:7.0.0
+    user: root
+    configs:
+      - source: packetbeat_config
+        target: /usr/share/packetbeat/packetbeat.yml
+    networks:
+      - elk
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    command: ["--strict.perms=false"]
+
+networks:
+  elk:
+    driver: overlay
+
+configs:
+  packetbeat_config:
+    file: ./packetbeat/packetbeat.yml

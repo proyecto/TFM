@@ -49,47 +49,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-  
-  filebeat:
-    image: docker.elastic.co/beats/filebeat:7.0.0
-    user: root
-    configs:
-      - source: filebeat_config
-        target: /usr/share/filebeat/filebeat.yml
-    depends_on:
-      - elasticsearch
-      - kibana
-      - logstash
-    networks:
-      - elk
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro  
-    deploy:
-      mode: replicated
-      replicas: 1
-
-  packetbeat:
-    image: docker.elastic.co/beats/packetbeat:7.0.0
-    user: root
-    configs:
-      - source: packetbeat_config
-        target: /usr/share/packetbeat/packetbeat.yml
-    depends_on:
-      - elasticsearch
-      - kibana
-      - logstash
-    networks:
-      - elk
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - /var/lib/docker/containers/:/var/lib/docker/containers/:ro  
-    deploy:
-      mode: replicated
-      replicas: 1
-    cap_add:
-      - NET_ADMIN
-      - NET_RAW
 
 configs:
     elastic_config:
@@ -100,10 +59,6 @@ configs:
         file: ./logstash/pipeline/logstash.conf
     kibana_config:
         file: ./kibana/config/kibana.yml
-    filebeat_config:
-        file: ./filebeat/filebeat.yml
-    packetbeat_config:
-        file: ./packetbeat/packetbeat.yml
 
 networks:
     elk:

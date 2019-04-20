@@ -39,9 +39,11 @@ Initialize portainer as a docker swarm service:
 
 `sudo docker service create --name portainer --publish 9000:9000 --constraint 'node.role == manager' --mount type=bind,src=/home/ubuntu/data,dst=/data --mount type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock portainer/portainer -H unix:///var/run/docker.sock`
 
-### Deploy ELK Stack + Filebeat
+### Deploy ELK Stack
 
+### Deploy Filebeat
 
+### Deploy Packetbeat
 
 
 
