@@ -11,7 +11,7 @@ filebeat.inputs:
     - /var/log/filebeat/*.log
 
 output.logstash:
-  hosts: ['logstash:5000', 'logstash:5001']
+  hosts: ['logstash:5000']
   tls:
     insecure: true
 
