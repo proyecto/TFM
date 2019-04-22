@@ -34,7 +34,7 @@ services:
     deploy:
       restart_policy:
         condition: any
-	  mode: replicated
+      mode: replicated
         replicas: 1
     networks: 
       - elk
@@ -60,7 +60,7 @@ services:
     deploy:
       restart_policy:
         condition: any
-	  mode: replicated
+      mode: replicated
         replicas: 1
     networks: 
       - elk
@@ -83,7 +83,7 @@ services:
     deploy:
       restart_policy:
         condition: any
-	  mode: replicated
+      mode: replicated
         replicas: 1
     networks:
       - elk
@@ -102,7 +102,7 @@ services:
     deploy:
       restart_policy:
         condition: any
-	  mode: replicated
+      mode: replicated
         replicas: 1
     networks: 
       - elk
@@ -114,7 +114,6 @@ services:
       interval: 30s
       timeout: 15s
       retries: 5
-
 networks:
   elk:
 volumes:
