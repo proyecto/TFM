@@ -1,125 +1,65 @@
 version: '3.3'
+
 services:
+
   elasticsearch:
-    image: 'docker.elastic.co/elasticsearch/elasticsearch:6.5.3'
-    deploy:
-      restart_policy:
-        condition: any
-      mode: replicated
-      replicas: 1
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    configs:
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
     environment:
-      network.host: _eth0:ipv4_
-      discovery.type: zen
-      discovery.zen.ping.unicast.hosts: tasks.elasticsearch
-      cluster.name: elasticdemo
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
-    volumes:
-      - esdata:/usr/share/elasticsearch/data
-    healthcheck:
-      test: curl -s http://elasticsearch:9300 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      interval: 30s
-      timeout: 10s
-      retries: 5
-
-  kibana:
-    image: 'docker.elastic.co/kibana/kibana:6.5.3'
-    ports:
-      - "80:5601"
-    environment: 
-      elasticsearch.url: "http://elasticsearch:9200"
-      server.ssl.enabled: "false"
-      xpack.monitoring.ui.container.elasticsearch.enabled: "true"
-      xpack.monitoring.collection.enabled: "true"
     deploy:
-      restart_policy:
-        condition: any
       mode: replicated
       replicas: 1
-    networks: 
-      - elk
-    depends_on: ['elasticsearch']
-    healthcheck:
-      test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      interval: 30s
-      timeout: 10s
-      retries: 5
-
-  apm-server:
-    image: 'docker.elastic.co/apm/apm-server:6.5.3'
-    command: "--strict.perms=false -e"
-    ports:
-      - "8200:8200"
-    environment: 
-      apm-server.frontend.enabled: "true"
-      output.elasticsearch.hosts: "elasticsearch:9200"
-      output.elasticsearch.protocol: "http"
-      setup.kibana.host: "http://kibana:5601"
-      setup.kibana.protocol: "http"
-      setup.kibana.ssl.enabled: "false"
-    deploy:
-      restart_policy:
-        condition: any
-      mode: replicated
-      replicas: 1
-    networks: 
-      - elk
-    depends_on: ['elasticsearch']
-    healthcheck:
-      test: curl -s http://localhost:8200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      interval: 30s
-      timeout: 10s
-      retries: 5
 
   logstash:
-    image: 'docker.elastic.co/logstash/logstash:6.5.3'
+    image: docker.elastic.co/logstash/logstash-oss:6.6.1
     ports:
-      - "5044:5044"
-    environment:
-      xpack.monitoring.elasticsearch.url: "http://elasticsearch:9200"
+      - "5000:5000"
+      - "9600:9600"
     configs:
-      - source: logstash.conf
+      - source: logstash_config
+        target: /usr/share/logstash/config/logstash.yml
+      - source: logstash_pipeline
         target: /usr/share/logstash/pipeline/logstash.conf
-    deploy:
-      restart_policy:
-        condition: any
-      mode: replicated
-      replicas: 1
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
-    depends_on: ['elasticsearch']
-    healthcheck:
-      test: bin/logstash -t
-      interval: 60s
-      timeout: 50s
-      retries: 5
-
-  metricbeat:
-    image: 'docker.elastic.co/beats/metricbeat:6.5.3'
-    configs:
-      - source: metricbeat.yml
-        target: /usr/share/metricbeat/metricbeat.yml
     deploy:
-      restart_policy:
-        condition: any
       mode: replicated
       replicas: 1
-    networks: 
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:6.6.1
+    ports:
+      - "5601:5601"
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+    networks:
       - elk
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    depends_on: ['elasticsearch']
-    healthcheck:
-      test: metricbeat test config
-      interval: 30s
-      timeout: 15s
-      retries: 5
+    deploy:
+      mode: replicated
+      replicas: 1
+
+configs:
+
+  elastic_config:
+    file: ./elasticsearch/config/elasticsearch.yml
+  logstash_config:
+    file: ./logstash/config/logstash.yml
+  logstash_pipeline:
+    file: ./logstash/pipeline/logstash.conf
+  kibana_config:
+    file: ./kibana/config/kibana.yml
+
 networks:
   elk:
-volumes:
-  esdata:
-configs:
-  metricbeat.yml:
-    file: ./metricbeat/metricbeat.yml
-  logstash.conf:
-    file: ./logstash/config/logstash.yml
+    driver: overlay
