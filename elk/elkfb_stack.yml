@@ -118,4 +118,4 @@ configs:
   metricbeat.yml:
     file: ./metricbeat/metricbeat.yml
   logstash.conf:
-    file: ./logstash/config/logstash.conf
+    file: ./logstash/config/logstash.yml
