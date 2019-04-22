@@ -57,8 +57,8 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      networks: 
-        - elks
+      networks:
+        - elk
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock
       depends_on: ['elasticsearch']
