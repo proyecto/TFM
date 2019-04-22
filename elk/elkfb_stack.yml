@@ -6,7 +6,7 @@ services:
       restart_policy:
         condition: any
 	  mode: replicated
-	        replicas: 1
+        replicas: 1
     environment:
       network.host: _eth0:ipv4_
       discovery.type: zen
@@ -35,7 +35,7 @@ services:
       restart_policy:
         condition: any
 	  mode: replicated
-	        replicas: 1
+        replicas: 1
     networks: 
       - elk
     depends_on: ['elasticsearch']
@@ -61,7 +61,7 @@ services:
       restart_policy:
         condition: any
 	  mode: replicated
-	        replicas: 1
+        replicas: 1
     networks: 
       - elk
     depends_on: ['elasticsearch']
@@ -84,7 +84,7 @@ services:
       restart_policy:
         condition: any
 	  mode: replicated
-	        replicas: 1
+        replicas: 1
     networks:
       - elk
     depends_on: ['elasticsearch']
@@ -103,7 +103,7 @@ services:
       restart_policy:
         condition: any
 	  mode: replicated
-	        replicas: 1
+        replicas: 1
     networks: 
       - elk
     volumes:
