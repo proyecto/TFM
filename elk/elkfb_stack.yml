@@ -49,6 +49,17 @@ services:
       mode: replicated
       replicas: 1
 
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:6.6.1
+    configs:
+      - source: metricbeat_config
+        target: /usr/share/metricbeat/metricbeat.yml
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+
 configs:
 
   elastic_config:
@@ -59,6 +70,8 @@ configs:
     file: ./logstash/pipeline/logstash.conf
   kibana_config:
     file: ./kibana/config/kibana.yml
+  metricbeat_config:
+    file: ./metricbeat/metricbeat.yml
 
 networks:
   elk:
