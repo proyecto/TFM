@@ -5,14 +5,15 @@ services:
     deploy:
       restart_policy:
         condition: any
-      mode: global
+	  mode: replicated
+	        replicas: 1
     environment:
       network.host: _eth0:ipv4_
       discovery.type: zen
       discovery.zen.ping.unicast.hosts: tasks.elasticsearch
       cluster.name: elasticdemo
     networks:
-      - elastinet
+      - elk
     volumes:
       - esdata:/usr/share/elasticsearch/data
     healthcheck:
@@ -33,9 +34,10 @@ services:
     deploy:
       restart_policy:
         condition: any
-      mode: global
+	  mode: replicated
+	        replicas: 1
     networks: 
-      - elastinet
+      - elk
     depends_on: ['elasticsearch']
     healthcheck:
       test: curl -s http://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
@@ -58,9 +60,10 @@ services:
     deploy:
       restart_policy:
         condition: any
-      mode: global
+	  mode: replicated
+	        replicas: 1
     networks: 
-      - elastinet
+      - elk
     depends_on: ['elasticsearch']
     healthcheck:
       test: curl -s http://localhost:8200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
@@ -80,9 +83,10 @@ services:
     deploy:
       restart_policy:
         condition: any
-      mode: global
+	  mode: replicated
+	        replicas: 1
     networks:
-      - elastinet
+      - elk
     depends_on: ['elasticsearch']
     healthcheck:
       test: bin/logstash -t
@@ -98,9 +102,10 @@ services:
     deploy:
       restart_policy:
         condition: any
-      mode: global
+	  mode: replicated
+	        replicas: 1
     networks: 
-      - elastinet
+      - elk
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on: ['elasticsearch']
@@ -111,7 +116,7 @@ services:
       retries: 5
 
 networks:
-  elastinet:
+  elk:
 volumes:
   esdata:
 configs:
