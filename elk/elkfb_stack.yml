@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.3'
 
 services:
 
@@ -48,19 +48,6 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-
-  metricbeat:
-    image: 'docker.elastic.co/beats/metricbeat:6.6.1'
-    configs:
-      - source: metricbeat.yml
-        target: /usr/share/metricbeat/metricbeat.yml
-    deploy:
-      mode: replicated
-      replicas: 1
-      networks:
-        - elk
-      volumes:
-        - /var/run/docker.sock:/var/run/docker.sock
 
 configs:
 
