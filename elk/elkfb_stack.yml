@@ -83,7 +83,7 @@ configs:
     file: ./kibana/config/kibana.yml
   metricbeat_config:
     file: ./metricbeat/metricbeat.yml
-  metricbeat_config:
+  packetbeat_config:
     file: ./packetbeat/packetbeat.yml
 
 networks:
