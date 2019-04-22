@@ -5,7 +5,7 @@ services:
     deploy:
       restart_policy:
         condition: any
-	  mode: replicated
+      mode: replicated
         replicas: 1
     environment:
       network.host: _eth0:ipv4_
