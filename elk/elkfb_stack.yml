@@ -12,7 +12,6 @@ services:
       - source: elastic_config
         target: /usr/share/elasticsearch/config/elasticsearch.yml
     environment:
-		
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
