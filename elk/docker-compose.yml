@@ -1,0 +1,92 @@
+version: '3.3'
+
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.0.0
+    container_name: elasticsearchContainer
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    configs:
+      - source: elastic_config
+        target: /usr/share/elasticsearch/config/elasticsearch.yml
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash-oss:7.0.0
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    configs:
+      - source: logstash_config
+        target: /usr/share/logstash/config/logstash.yml
+      - source: logstash_pipeline
+        target: /usr/share/logstash/pipeline/logstash.conf
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana-oss:7.0.0
+    ports:
+      - "5601:5601"
+    configs:
+      - source: kibana_config
+        target: /usr/share/kibana/config/kibana.yml
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  metricbeat:
+    image: docker.elastic.co/beats/metricbeat:7.0.0
+    configs:
+      - source: metricbeat_config
+        target: /usr/share/metricbeat/metricbeat.yml
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+
+  packetbeat:
+    image: docker.elastic.co/beats/packetbeat:7.0.0
+    configs:
+      - source: packetbeat_config
+        target: /usr/share/packetbeat/packetbeat.yml
+    networks:
+      - elk
+    deploy:
+      mode: replicated
+      replicas: 1
+
+configs:
+
+  elastic_config:
+    file: ./elasticsearch/config/elasticsearch.yml
+  logstash_config:
+    file: ./logstash/config/logstash.yml
+  logstash_pipeline:
+    file: ./logstash/pipeline/logstash.conf
+  kibana_config:
+    file: ./kibana/config/kibana.yml
+  metricbeat_config:
+    file: ./metricbeat/metricbeat.yml
+  packetbeat_config:
+    file: ./packetbeat/packetbeat.yml
+
+networks:
+  elk:
+    driver: overlay
