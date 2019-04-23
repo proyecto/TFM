@@ -1,9 +1,10 @@
-version: '3.3'
+version: '2.2'
 
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.6.1
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.0.0
+	container_name: elasticsearchContainer
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -14,12 +15,9 @@ services:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
-    deploy:
-      mode: replicated
-      replicas: 1
 
   logstash:
-    image: docker.elastic.co/logstash/logstash-oss:6.6.1
+    image: docker.elastic.co/logstash/logstash-oss:7.0.0
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -32,12 +30,9 @@ services:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
       - elk
-    deploy:
-      mode: replicated
-      replicas: 1
 
   kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.6.1
+    image: docker.elastic.co/kibana/kibana-oss:7.0.0
     ports:
       - "5601:5601"
     configs:
@@ -45,31 +40,22 @@ services:
         target: /usr/share/kibana/config/kibana.yml
     networks:
       - elk
-    deploy:
-      mode: replicated
-      replicas: 1
 
   metricbeat:
-    image: docker.elastic.co/beats/metricbeat:6.6.1
+    image: docker.elastic.co/beats/metricbeat:7.0.0
     configs:
       - source: metricbeat_config
         target: /usr/share/metricbeat/metricbeat.yml
     networks:
       - elk
-    deploy:
-      mode: replicated
-      replicas: 1
 
   packetbeat:
-    image: docker.elastic.co/beats/packetbeat:6.6.1
+    image: docker.elastic.co/beats/packetbeat:7.0.0
     configs:
       - source: packetbeat_config
         target: /usr/share/packetbeat/packetbeat.yml
     networks:
       - elk
-    deploy:
-      mode: replicated
-      replicas: 1
 
 configs:
 
