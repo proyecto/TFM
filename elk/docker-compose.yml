@@ -1,10 +1,8 @@
-version: '3.7'
+version: '3'
 services:
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.0.0
-volumes:
-  esdata1:
-  logs:
-networks:
-  elastic:
-  ingress:
+  web:
+    build: .
+    ports:
+     - "5000:5000"
+  redis:
+    image: "redis:alpine"
