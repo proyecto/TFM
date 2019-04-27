@@ -4,7 +4,7 @@ services:
 
   elasticsearch:
     environment:
-      ELK_VERSION=7.0.0
+      - ELK_VERSION=7.0.0
     build:
       context: elasticsearch/
       args:
@@ -21,7 +21,7 @@ services:
 
   logstash:
     environment:
-      ELK_VERSION=7.0.0
+      - ELK_VERSION=7.0.0
     build:
       context: logstash/
       args:
@@ -41,7 +41,7 @@ services:
 
   kibana:
     environment:
-      ELK_VERSION=7.0.0
+      - ELK_VERSION=7.0.0
     build:
       context: kibana/
       args:
