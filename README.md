@@ -46,15 +46,15 @@ sudo chmod +x /usr/local/bin/docker-compose
 Create a folder to store portainer data:
 
 ```bash
-sudo mkdir /data
-sudo chmod 777 /data
+mkdir $HOME/data
+sudo chmod -R 777 $HOME/data
 docker volume create portainer_data
 ```
 
 Deploy portainer:
 
 ```bash
-docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/home/ubuntu/data portainer/portainer
 ```
 
 Create the user, and connect to the local docker instance.
