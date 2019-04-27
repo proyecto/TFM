@@ -39,5 +39,5 @@
       "9300/tcp"
     ],
     "volumes": ["/usr/share/elasticsearch/data"]
-    }
+  }
 ]
