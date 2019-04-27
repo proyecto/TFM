@@ -31,8 +31,8 @@
     "type": 1,
     "title": "Elasticsearch",
     "description": "Open-source search and analytics engine.[",
-    "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/jacket-icon.png",
-    "image": "linuxserver/jackett:latest",
+    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/elasticsearch.png",
+    "image": "elasticsearch:latest",
     "category": ["Downloaders", "Tools"],
     "platform": "linux",
     "ports": [  
