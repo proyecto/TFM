@@ -4,8 +4,8 @@ services:
 
   elasticsearch:
     environment:
-      - ELK_VERSION=7.0.0
-      - ES_JAVA_OPTS="-Xmx256m -Xms256m"
+      ELK_VERSION: 7.0.0
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     build:
       context: elasticsearch/
       args:
@@ -20,8 +20,8 @@ services:
 
   logstash:
     environment:
-      - ELK_VERSION=7.0.0
-      - LS_JAVA_OPTS="-Xmx256m -Xms256m"
+      ELK_VERSION: 7.0.0
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     build:
       context: logstash/
       args:
@@ -32,8 +32,6 @@ services:
     ports:
       - "5000:5000"
       - "9600:9600"
-    environment:
-      
     networks:
       - elk
     depends_on:
@@ -41,7 +39,7 @@ services:
 
   kibana:
     environment:
-      - ELK_VERSION=7.0.0
+      ELK_VERSION: 7.0.0
     build:
       context: kibana/
       args:
