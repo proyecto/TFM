@@ -6,7 +6,7 @@ services:
     build:
       context: elasticsearch/
     volumes:
-      - ${pwd}/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -19,8 +19,8 @@ services:
     build:
       context: logstash/
     volumes:
-      - ${pwd}/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
-      - ${pwd}/logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -35,7 +35,7 @@ services:
     build:
       context: kibana/
     volumes:
-      - ${pwd}/kibana/config:/usr/share/kibana/config:ro
+      - ./kibana/config:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
     networks:
