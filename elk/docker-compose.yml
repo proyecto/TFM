@@ -1,92 +1,55 @@
-version: '2.2'
+version: '2'
+
 services:
+
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
-    container_name: elasticsearch
-    environment:
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - http.cors.enabled=true
-      - http.cors.allow-origin=*
-      - discovery.zen.minimum_master_nodes=2
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+    build:
+      context: elasticsearch/
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
-      - esdata1:/usr/share/elasticsearch/data
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
-      - 9200:9200
-    networks:
-      - esnet
-
-  elasticsearch2:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
-    container_name: elasticsearch2
+      - "9200:9200"
+      - "9300:9300"
     environment:
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch"
-      - http.cors.enabled=true
-      - http.cors.allow-origin=*
-      - discovery.zen.minimum_master_nodes=2
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    volumes:
-      - esdata2:/usr/share/elasticsearch/data
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
-      - esnet
+      - elk
 
-  elasticsearch3:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.4.2
-    container_name: elasticsearch3
-    environment:
-      - cluster.name=docker-cluster
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch"
-      - http.cors.enabled=true
-      - http.cors.allow-origin=*
-      - discovery.zen.minimum_master_nodes=2
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
+  logstash:
+    build:
+      context: logstash/
+      args:
+        ELK_VERSION: $ELK_VERSION
     volumes:
-      - esdata3:/usr/share/elasticsearch/data
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
-      - esnet
+      - elk
+    depends_on:
+      - elasticsearch
 
   kibana:
-    image: 'docker.elastic.co/kibana/kibana:6.4.2'
-    container_name: kibana
-    environment:
-      SERVER_NAME: kibana.local
-      ELASTICSEARCH_URL: http://elasticsearch:9200
+    build:
+      context: kibana/
+      args:
+        ELK_VERSION: $ELK_VERSION
+    volumes:
+      - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
-      - '5601:5601'
+      - "5601:5601"
     networks:
-      - esnet
-
-  headPlugin:
-    image: 'mobz/elasticsearch-head:5'
-    container_name: head
-    ports:
-      - '9100:9100'
-    networks:
-      - esnet
-
-volumes:
-  esdata1:
-    driver: local
-  esdata2:
-    driver: local
-  esdata3:
-    driver: local    
+      - elk
+    depends_on:
+      - elasticsearch
 
 networks:
-  esnet:
+
+  elk:
+    driver: bridge
