@@ -26,18 +26,5 @@
         "set":""
       }
     ]
-  },
-  {
-    "type": 1,
-    "title": "Elasticsearch",
-    "description": "Open-source search and analytics engine",
-    "category": ["database"],
-    "platform": "linux",
-    "image": "elasticsearch:latest",
-    "ports": [
-      "9200/tcp",
-      "9300/tcp"
-    ],
-    "volumes": ["/usr/share/elasticsearch/data"]
   }
 ]
