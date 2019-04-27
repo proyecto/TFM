@@ -4,7 +4,7 @@
 
 ### Create the VM
 
-Created a virtual machine with IP 192.168.1.107 and installed ubuntu server 18.04, then updated the repos:
+Created a virtual machine with IP 192.168.1.107 and installed ubuntu server 18.10, then updated the repos:
 
 ```
 sudo apt-get update
@@ -17,7 +17,7 @@ Configure docker repository:
 
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
 
 Update the the repository information, install and init docker:
@@ -25,10 +25,16 @@ Update the the repository information, install and init docker:
 ```bash
 sudo apt-get update
 sudo apt-get install -y docker-ce
-sudo apt-get install docker-compose
 systemctl start docker
 systemctl enable docker
 sudo usermod -a -G docker $USER
+```
+
+### Install Docker-Compose
+
+```bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
 ```
 
 ### Configure Portainer
@@ -36,15 +42,17 @@ sudo usermod -a -G docker $USER
 Create a folder to store portainer data:
 
 ```bash
-mkdir /home/ubuntu/data
-docker volume create portainer_data
+mkdir $HOME/data
+sudo docker volume create portainer_data
 ```
 
 Initialize portainer:
 
 ```bash
-docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+sudo docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 ```
+
+Create the user, and connect to the local docker instance.
 
 ### Deploy ELK Stack
 
