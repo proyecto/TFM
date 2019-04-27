@@ -8,10 +8,24 @@
     "category": ["Downloaders", "Tools"],
     "platform": "linux",
     "ports": [  
-      "9200/tcp",
-      "9300/tcp"
+      "9117/tcp"
     ],
-    "volumes": ["/usr/share/elasticsearch/data"],
+    "volumes": [
+      {"container": "/config"},
+      {"container": "/downloads"}
+    ],
+    "env": [  
+      {  
+        "name":"PUID",
+        "label":"PUID",
+        "set":""
+      },
+      {  
+        "name":"PGID",
+        "label":"PGID",
+        "set":""
+      }
+    ]
   },
   {  
     "type": 1,
