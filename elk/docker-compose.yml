@@ -8,7 +8,7 @@ services:
     build:
       context: elasticsearch/
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./elasticsearch/config:/usr/share/elasticsearch/config:ro
     ports:
@@ -25,7 +25,7 @@ services:
     build:
       context: logstash/
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./logstash/config:/usr/share/logstash/config:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -45,7 +45,7 @@ services:
     build:
       context: kibana/
       args:
-        ELK_VERSION: $ELK_VERSION
+        ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./kibana/config:/usr/share/kibana/config:ro
     ports:
