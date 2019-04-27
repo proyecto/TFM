@@ -54,5 +54,33 @@
         "set":""
       }
     ]
+  },
+  {  
+    "type": 1,
+    "title": "Elasticsearch",
+    "description": "Open-source search and analytics engine.[",
+    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/elasticsearch.png",
+    "image": "elasticsearch:latest",
+    "category": ["Downloaders", "Tools"],
+    "platform": "linux",
+    "ports": [  
+      "9117/tcp"
+    ],
+    "volumes": [
+      {"container": "/config"},
+      {"container": "/downloads"}
+    ],
+    "env": [  
+      {  
+        "name":"PUID",
+        "label":"PUID",
+        "set":""
+      },
+      {  
+        "name":"PGID",
+        "label":"PGID",
+        "set":""
+      }
+    ]
   }
 ]
