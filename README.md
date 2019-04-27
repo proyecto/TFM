@@ -30,6 +30,8 @@ systemctl enable docker
 sudo usermod -a -G docker $USER
 ```
 
+Now you have to reboot the system to apply the privileges change.
+
 ### Install Docker-Compose
 
 We can install docker compose directly from ubuntu repository, but it is not the latest version. Though this command, you can install the latest version.
@@ -44,14 +46,15 @@ sudo chmod +x /usr/local/bin/docker-compose
 Create a folder to store portainer data:
 
 ```bash
-mkdir $HOME/data
-sudo docker volume create portainer_data
+sudo mkdir /data
+sudo chmod 777 /data
+docker volume create portainer_data
 ```
 
-Initialize portainer:
+Deploy portainer:
 
 ```bash
-sudo docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
 ```
 
 Create the user, and connect to the local docker instance.
