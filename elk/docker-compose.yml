@@ -3,8 +3,8 @@ version: '2'
 services:
 
   elasticsearch:
-    env_file:
-      - ./envvars
+    environment:
+      ELK_VERSION=7.0.0
     build:
       context: elasticsearch/
       args:
@@ -20,14 +20,14 @@ services:
       - elk
 
   logstash:
-    env_file:
-      - ./envvars
+    environment:
+      ELK_VERSION=7.0.0
     build:
       context: logstash/
       args:
         ELK_VERSION: $ELK_VERSION
     volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config:ro
+      - ./logstash/config:/usr/share/logstash/config:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
@@ -40,8 +40,8 @@ services:
       - elasticsearch
 
   kibana:
-    env_file:
-      - ./envvars
+    environment:
+      ELK_VERSION=7.0.0
     build:
       context: kibana/
       args:
