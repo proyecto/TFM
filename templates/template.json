@@ -1,31 +1,14 @@
 [
   {
-    "type": "stack",
-    "title": "IronFunctions",
-    "description": "Open-source serverless computing platform",
-    "note": "Deploys the IronFunctions API and UI.",
+    "type": 3,
+    "title": "ElasticSearch, Kibana, LogStash, Filebeat, Packetbeat Stack",
+    "description": "Monitoring Platform",
     "categories": ["serverless"],
     "platform": "linux",
     "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/ironfunctions.png",
     "repository": {
-      "url": "https://github.com/portainer/templates",
-      "stackfile": "stacks/ironfunctions/docker-stack.yml"
+      "url": "https://github.com/proyecto/TFM",
+      "stackfile": "templates/stack/docker-stack.yml"
     }
-  },
-  {  
-    "type": 1,
-    "title": "Elasticsearch",
-    "description": "Open-source search and analytics engine.",
-    "logo": "https://portainer-io-assets.sfo2.digitaloceanspaces.com/logos/elasticsearch.png",
-    "image": "elasticsearch:7.0.0",
-    "category": ["Downloaders", "Tools"],
-    "platform": "linux",
-    "ports": [  
-      "9200/tcp",
-	  "9300/tcp"
-    ],
-    "volumes": [
-      {"container": "/usr/share/elasticsearch/data"}
-    ]
   }
 ]
