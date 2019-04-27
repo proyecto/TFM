@@ -17,6 +17,7 @@ services:
       - "9300:9300"
     networks:
       - elk
+    entrypoint: ["sh"]
 
   logstash:
     environment:
@@ -36,6 +37,7 @@ services:
       - elk
     depends_on:
       - elasticsearch
+    entrypoint: ["sh"]
 
   kibana:
     environment:
@@ -52,6 +54,7 @@ services:
       - elk
     depends_on:
       - elasticsearch
+    entrypoint: ["sh"]
 
 networks:
 
