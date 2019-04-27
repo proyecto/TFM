@@ -29,8 +29,8 @@
   },
   {  
     "type": 1,
-    "title": "jackett",
-    "description": "Jackett works as a proxy server it translates queries from apps like Sonarr etc into tracker-site-specific http queries and parses the html response sending results back to the requesting software.[",
+    "title": "Elasticsearch",
+    "description": "Open-source search and analytics engine.[",
     "logo": "https://raw.githubusercontent.com/Qballjos/portainer_templates/master/Images/jacket-icon.png",
     "image": "linuxserver/jackett:latest",
     "category": ["Downloaders", "Tools"],
