@@ -3,10 +3,12 @@ version: '2'
 services:
 
   elasticsearch:
+    env_file:
+      - ./envvars
     build:
       context: elasticsearch/
     volumes:
-      - ${pwd}/elasticsearch/config:/usr/share/elasticsearch/config:ro
+      - ./elasticsearch/config:/usr/share/elasticsearch/config:ro
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -16,11 +18,13 @@ services:
       - elk
 
   logstash:
+    env_file:
+      - ./envvars
     build:
       context: logstash/
     volumes:
-      - ${pwd}/logstash/config/logstash.yml:/usr/share/logstash/config:ro
-      - ${pwd}/logstash/pipeline:/usr/share/logstash/pipeline:ro
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
     ports:
       - "5000:5000"
       - "9600:9600"
@@ -32,10 +36,12 @@ services:
       - elasticsearch
 
   kibana:
+    env_file:
+      - ./envvars
     build:
       context: kibana/
     volumes:
-      - ${pwd}/kibana/config:/usr/share/kibana/config:ro
+      - ./kibana/config:/usr/share/kibana/config:ro
     ports:
       - "5601:5601"
     networks:
