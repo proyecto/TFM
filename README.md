@@ -61,6 +61,15 @@ Create the user, and connect to the local docker instance.
 
 ### Deploy ELK Stack
 
+Due to the version at the current portainer docker (1.22.2), and the docker-compose it has installed, we should launch the ELK Stack from console. SSH to the Docker host, clone this repo, and run:
+
+```bash
+cd /path.to.repo/TFM/elk
+docker-compose up -d
+```
+
+We can monitor the status of the ELK containers at portainer.
+
 ### Deploy Filebeat
 
 ### Deploy Packetbeat
