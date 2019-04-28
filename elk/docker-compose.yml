@@ -68,12 +68,17 @@ services:
   packetbeat:
     environment:
       ELK_VERSION: 7.0.0
+    user: root
     build:
       context: packetbeat/
       args:
         ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./filebeat/config/packetbeat.yml:/usr/share/filebeat/config/packetbeat.yml:ro
+    cap_add:
+      - NET_RAW
+      - NET_ADMIN
+    command: ["--strict.perms=false"]
     networks:
       - elk
 
