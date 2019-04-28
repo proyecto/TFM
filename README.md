@@ -70,10 +70,6 @@ docker-compose up -d
 
 We can monitor the status of the ELK containers at portainer.
 
-### Deploy Filebeat
-
-### Deploy Packetbeat
-
 ### Deploy service containers
 
 Deployed a nginx container just to generate logs and test
