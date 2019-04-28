@@ -3,7 +3,6 @@ version: '2'
 services:
 
   elasticsearch:
-    entrypoint: ["sh"]
     environment:
       ELK_VERSION: 7.0.0
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -20,7 +19,6 @@ services:
       - elk
 
   logstash:
-    entrypoint: ["sh"]
     environment:
       ELK_VERSION: 7.0.0
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
@@ -40,7 +38,6 @@ services:
       - elasticsearch
 
   kibana:
-    entrypoint: ["sh"]
     environment:
       ELK_VERSION: 7.0.0
     build:
