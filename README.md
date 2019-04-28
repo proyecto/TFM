@@ -57,7 +57,7 @@ Deploy portainer:
 docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/home/ubuntu/data portainer/portainer
 ```
 
-Create the user, and connect to the local docker instance.
+Go to the web interaface, create the user, and connect to the local docker instance.
 
 ### Deploy ELK Stack
 
