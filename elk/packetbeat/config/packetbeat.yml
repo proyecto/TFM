@@ -18,6 +18,9 @@ packetbeat.protocols:
 - type: http
     enabled: true
     ports: [80, 5601, 8000, 8080, 9200, 32769]
+    send_headers: ["User-Agent", "Cookie", "Set-Cookie"]
+    send_response: true
+    include_body_for: ["text/html"]
 
 packetbeat.flows:
   enabled: true
