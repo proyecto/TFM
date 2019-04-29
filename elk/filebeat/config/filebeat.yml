@@ -1,8 +1,6 @@
 setup.template.name: "filebeat-"
 setup.template.pattern: "filebeat-*"
-setup.dashboards.enabled: true
-setup.kibana.host: 'kibana:5601'
-setup.kibana.protocol: "http"
+setup.dashboards.enabled: false
 
 filebeat.inputs:
 - type: log
