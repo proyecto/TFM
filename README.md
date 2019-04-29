@@ -13,7 +13,7 @@ sudo apt-get upgrade
 
 ### Configure Docker
 
-Configure docker repository:
+Add docker repository:
 
 ```bash
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
