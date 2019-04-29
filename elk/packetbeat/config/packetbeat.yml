@@ -3,6 +3,10 @@ setup.template.name: "packetbeat-"
 setup.template.pattern: "packetbeat-*"
 
 packetbeat.protocols:
+- type: icmp
+  enabled: true
+- type: dhcpv4
+  ports: [67, 68]
 - type: dns
   enabled: true
   ports: [53]
