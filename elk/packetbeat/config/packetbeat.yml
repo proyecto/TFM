@@ -1,13 +1,10 @@
 packetbeat.interfaces.device: any
 setup.template.name: "packetbeat-"
 setup.template.pattern: "packetbeat-*"
-logging.level: debug
-logging.to_files: true
-logging.files:
-  path: /var/log/packetbeat
-  name: packetbeat
-  keepfiles: 7
-  permissions: 0644
+setup.dashboards.enabled: true
+setup.kibana.host: '127.0.0.1:5601'
+setup.kibana.protocol: "http"
+setup.kibana.path: ''
 
 packetbeat.protocols:
 - type: dns
