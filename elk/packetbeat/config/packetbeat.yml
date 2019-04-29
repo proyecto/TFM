@@ -4,17 +4,19 @@ setup.template.pattern: "packetbeat-*"
 
 packetbeat.protocols:
 - type: icmp
-  enabled: true
+    enabled: true
+    ports: [1,3,6,10,80]
 - type: dhcpv4
-  ports: [67, 68]
+    ports: [67, 68]
 - type: dns
-  enabled: true
-  ports: [53]
-  include_authorities: true
-  include_additionals: true
+    enabled: true
+    ports: [53]
+    include_authorities: true
+    include_additionals: true
 - type: http
-  enabled: true
-  ports: [80, 5601, 8000, 8080, 9200, 32769]
+    enabled: true
+    ports: [80, 5601, 8000, 8080, 9200, 32769]
+
 packetbeat.flows:
   enabled: true
   timeout: 30s
