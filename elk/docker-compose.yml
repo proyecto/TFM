@@ -27,6 +27,8 @@ services:
       - "5000:5000"
       - "5001:5001"
       - "9600:9600"
+    expose:
+      - "5000"
     networks:
       - elk
     depends_on:
