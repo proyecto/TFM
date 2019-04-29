@@ -9,7 +9,8 @@ packetbeat.protocols:
   include_authorities: true
   include_additionals: true
 - type: http
-  ports: [80, 8000, 8080, 9200, 32769, 5601]
+  enabled: true
+  ports: [80, 5601, 8000, 8080, 9200, 32769]
 packetbeat.flows:
   enabled: true
   timeout: 30s
