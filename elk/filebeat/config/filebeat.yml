@@ -1,6 +1,7 @@
 setup.template.name: "filebeat-"
 setup.template.pattern: "filebeat-*"
 setup.dashboards.enabled: false
+setup.kibana.ssl.enabled: false
 
 filebeat.inputs:
 - type: log
