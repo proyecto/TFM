@@ -1,7 +1,7 @@
 setup.template.name: "filebeat-"
 setup.template.pattern: "filebeat-*"
 setup.dashboards.enabled: true
-setup.kibana.host: '127.0.0.1:5601'
+setup.kibana.host: 'kibana:5601'
 setup.kibana.protocol: "http"
 setup.kibana.path: ''
 
