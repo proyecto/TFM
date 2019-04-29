@@ -17,7 +17,7 @@ filebeat.prospectors:
   json.message_key: log
   json.keys_under_root: true
   processors:
-  - add_docker_metadata: ~
+  			- add_docker_metadata: ~
 
 output.logstash:
   enabled: true
