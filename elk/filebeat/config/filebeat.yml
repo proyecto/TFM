@@ -5,7 +5,7 @@ setup.kibana.host: 'kibana:5601'
 setup.kibana.protocol: "http"
 setup.kibana.path: ''
 
-filebeat.prospectors:
+filebeat.inputs:
 - type: log
   enabled: true
   paths:
