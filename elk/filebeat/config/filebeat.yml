@@ -4,20 +4,16 @@ setup.dashboards.enabled: true
 setup.kibana.host: 'kibana:5601'
 setup.kibana.protocol: "http"
 setup.kibana.path: ''
-filebeat.inputs:
-- type: log
-  enabled: true
-  paths:
-    - /var/log/filebeat/*.log
 
 filebeat.prospectors:
 - type: log
+  enabled: true
   paths:
    - '/var/lib/docker/containers/*/*.log'
   json.message_key: log
   json.keys_under_root: true
   processors:
-  			- add_docker_metadata: ~
+  - add_docker_metadata: ~
 
 output.logstash:
   enabled: true
