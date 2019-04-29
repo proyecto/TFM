@@ -59,6 +59,9 @@ services:
       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/config/filebeat.yml:ro
     networks:
       - elk
+    depends_on:
+      - elasticsearch
+      - logstash
 
   packetbeat:
     user: root
@@ -74,8 +77,10 @@ services:
     command: ["--strict.perms=false"]
     networks:
       - elk
+    depends_on:
+      - elasticsearch
+      - logstash
 
 networks:
-
   elk:
     driver: bridge
