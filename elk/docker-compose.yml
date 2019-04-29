@@ -57,6 +57,7 @@ services:
         ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/config/filebeat.yml:ro
+	  - /var/lib/docker/containers:/var/lib/docker/containers:ro
     networks:
       - elk
     depends_on:
@@ -71,6 +72,7 @@ services:
         ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./packetbeat/config/packetbeat.yml:/usr/share/packetbeat/config/packetbeat.yml:ro
+	  - /var/lib/docker/containers:/var/lib/docker/containers:ro
     cap_add:
       - NET_RAW
       - NET_ADMIN
