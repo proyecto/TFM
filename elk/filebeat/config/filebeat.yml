@@ -17,7 +17,7 @@ filebeat.prospectors:
 
 output.logstash:
   enabled: true
-  hosts: ['logstash:5000']
+  hosts: ['127.0.0.1:5000']
   tls:
     insecure: true
 
