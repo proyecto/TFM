@@ -1,8 +1,8 @@
+setup.template.name: "packetbeat-"
+setup.template.pattern: "packetbeat-*"
 packetbeat.interfaces.device: any
 packetbeat.interfaces.type: af_packet
 packetbeat.interfaces.buffer_size_mb: 100
-setup.template.name: "packetbeat-"
-setup.template.pattern: "packetbeat-*"
 
 packetbeat.protocols:
 - type: icmp
@@ -29,6 +29,6 @@ packetbeat.flows:
 
 output.logstash:
   enabled: true
-  hosts: ['127.0.0.1:5000']
+  hosts: ['logstash:5000']
   tls:
     insecure: true
