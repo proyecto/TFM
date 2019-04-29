@@ -15,6 +15,16 @@ filebeat.prospectors:
   processors:
   - add_docker_metadata: ~
 
+autodiscover.providers:
+  - type: docker
+    templates:
+      - condition.contains:
+          docker.container.image: nginx
+        config:
+          - type: log
+            paths:
+              - "/mnt/logs/${data.docker.container.id}/*.log"
+
 output.logstash:
   enabled: true
   hosts: ['127.0.0.1:5000']
