@@ -20,6 +20,7 @@ packetbeat.flows:
   period: 10s
 
 output.logstash:
-  hosts: ['logstash:5000']
+  enabled: true
+  hosts: ['127.0.0.1:5000']
   tls:
     insecure: true
