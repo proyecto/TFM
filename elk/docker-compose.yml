@@ -45,6 +45,7 @@ services:
       - elasticsearch
 
   filebeat:
+    user: root
     build:
       context: filebeat/
     volumes:
