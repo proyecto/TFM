@@ -56,7 +56,7 @@ services:
       args:
         ELK_VERSION: $$ELK_VERSION
     volumes:
-      - ./filebeat/config/filebeat.yml:/usr/share/filebeat/config/filebeat.yml:ro
+      - ./filebeat/config/filebeat.yml:/usr/share/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     command: ["--strict.perms=false"]
