@@ -7,8 +7,6 @@ services:
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     build:
       context: elasticsearch/
-      args:
-        ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     ports:
@@ -22,8 +20,6 @@ services:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     build:
       context: logstash/
-      args:
-        ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
@@ -39,8 +35,6 @@ services:
   kibana:
     build:
       context: kibana/
-      args:
-        ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./kibana/config/:/usr/share/kibana/config:ro
     ports:
@@ -53,8 +47,6 @@ services:
   filebeat:
     build:
       context: filebeat/
-      args:
-        ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./filebeat/config/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
@@ -70,8 +62,6 @@ services:
     user: root
     build:
       context: packetbeat/
-      args:
-        ELK_VERSION: $$ELK_VERSION
     volumes:
       - ./packetbeat/config/packetbeat.yml:/usr/share/packetbeat/config/packetbeat.yml:ro
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
