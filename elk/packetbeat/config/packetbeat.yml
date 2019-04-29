@@ -1,0 +1,29 @@
+packetbeat.interfaces.device: any
+setup.template.name: "packetbeat-"
+setup.template.pattern: "packetbeat-*"
+logging.level: debug
+logging.to_files: true
+logging.files:
+  path: /var/log/packetbeat
+  name: packetbeat
+  keepfiles: 7
+  permissions: 0644
+
+packetbeat.protocols:
+- type: dns
+  enabled: true
+  ports: [53]
+  include_authorities: true
+  include_additionals: true
+- type: http
+  ports: [80, 8000, 8080, 9200, 32769]
+packetbeat.flows:
+  enabled: true
+  timeout: 30s
+  period: 10s
+
+output.logstash:
+  enabled: true
+  hosts: ['127.0.0.1:5000']
+  tls:
+    insecure: true
