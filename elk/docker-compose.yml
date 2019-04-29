@@ -4,7 +4,6 @@ services:
 
   elasticsearch:
     environment:
-      ELK_VERSION: 7.0.0
       ES_JAVA_OPTS: "-Xmx256m -Xms256m"
     build:
       context: elasticsearch/
@@ -20,7 +19,6 @@ services:
 
   logstash:
     environment:
-      ELK_VERSION: 7.0.0
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     build:
       context: logstash/
@@ -39,8 +37,6 @@ services:
       - elasticsearch
 
   kibana:
-    environment:
-      ELK_VERSION: 7.0.0
     build:
       context: kibana/
       args:
@@ -55,8 +51,6 @@ services:
       - elasticsearch
 
   filebeat:
-    environment:
-      ELK_VERSION: 7.0.0
     build:
       context: filebeat/
       args:
@@ -67,15 +61,13 @@ services:
       - elk
 
   packetbeat:
-    environment:
-      ELK_VERSION: 7.0.0
     user: root
     build:
       context: packetbeat/
       args:
         ELK_VERSION: $$ELK_VERSION
     volumes:
-      - ./filebeat/config/packetbeat.yml:/usr/share/filebeat/config/packetbeat.yml:ro
+      - ./packetbeat/config/packetbeat.yml:/usr/share/packetbeat/config/packetbeat.yml:ro
     cap_add:
       - NET_RAW
       - NET_ADMIN
