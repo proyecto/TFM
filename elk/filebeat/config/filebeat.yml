@@ -3,6 +3,13 @@ setup.kibana.ssl.enabled: false
 setup.template.name: "filebeat-"
 setup.template.pattern: "filebeat-*"
 
+filebeat.modules:
+- module: nginx
+  access:
+    var.paths: ["/testvar/nginx/access.log"]
+  error:
+    var.paths: ["/testvar/nginx/error.log"]
+
 filebeat.inputs:
 - type: log
   enabled: true
